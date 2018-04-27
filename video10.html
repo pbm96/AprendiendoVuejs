@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="https://cdn.jsdelivr.net/npm/animate.css@3.5.1" rel="stylesheet" type="text/css">
+
+    <style>
+        .aparecer-enter{
+            opacity: 0;
+        }
+        .aparecer-enter-active{
+            transition: opacity 1s;
+        }
+
+        .aparecer-leave-active{
+            transition: opacity 1s;
+        }
+        .aparecer-leave-to{
+            opacity: 0;
+        }
+
+
+        /* animacion*/
+        .bounce-enter-active{
+            animation: bounce-in .5s;
+        }
+        .bounce-leave-active{
+            animation: bounce-out.5s;
+        }
+
+        @keyframes bounce-in {
+            0%{
+                transform: scale(0);
+            }
+            50%{
+                transform: scale(1.5);
+            }
+            100%{
+                transform: scale(1);
+            }
+        }
+        @keyframes bounce-out {
+            0%{
+                transform: scale(1);
+            }
+            50%{
+                transform: scale(0.5);
+            }
+            100%{
+                transform: scale(0);
+            }
+        }
+
+    </style>
+
+</head>
+<body>
+
+<main>
+    <button @click="mostrar = !mostrar ">Mostrar/Ocultar</button>
+
+    <transition name="aparecer">
+        <h1 v-if="mostrar " v-text="mensajes.transicion"></h1>
+    </transition>
+
+    <transition name="bounce" appear>
+        <h1 v-if="mostrar " v-text="mensajes.animacion"></h1>
+    </transition>
+
+
+    <transition
+            name="animate.css"
+            enter-active-class="animated rotateInUpLeft"
+            leave-active-class="animated zoomOutUp">
+        <h1 v-if="mostrar " v-text="mensajes.animationCustom"></h1>
+    </transition>
+
+
+    <transition name="aparecer" mode="out-in">
+        <h1 v-if="mostrar " v-text="mensajes.entreElementos" key="aparecer" ></h1>
+
+        <h1 v-else key="ocultar">No hay mensaje primo</h1>
+    </transition>
+
+
+
+    <pre>{{$data}}</pre>
+</main>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+<script>
+    new Vue({
+        el:'main',
+
+        data:{
+            mostrar:true,
+
+            mensajes:{
+                transicion:'Transiciones CSS con Vue.js',
+                animacion:'animacion CSS con Vue.js',
+                animationCustom:'Animaciones custom CSS con Vuej.js',
+                entreElementos:'Transiciones entre elementos con Vue.js',
+            }
+        }
+    })
+</script>
+</body>
+</html>
